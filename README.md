@@ -2,8 +2,8 @@
 
 ## Student Information
 
-- **Name**: John Doe
-- **Student ID**: 12345678
+- **Name**: Anvitha Hegde
+- **Student ID**: 013829998
 - **Semester**: Fall 2018
 - **Class**: CS 161-6
 
