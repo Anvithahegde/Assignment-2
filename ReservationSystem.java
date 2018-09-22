@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReservationSystem {
@@ -12,7 +13,10 @@ public class ReservationSystem {
                 f.createNewFile();
             }
 
-            in = DisplayPromptToUserAndReceiveInput(flightName);
+            while(true){
+                in = DisplayPromptToUserAndReceiveInput(flightName);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -21,37 +25,42 @@ public class ReservationSystem {
 
     public static String DisplayPromptToUserAndReceiveInput(String flightName) {
         Scanner reader = new Scanner(System.in);
-        System.out.println("AIRLINE RESERVATION SYSTEM\n");
-        System.out.println("Add [P]assenger,\t");
-        System.out.println("Add [G]roup,\t");
-        System.out.println("[C]ancel Reservations,\t");
-        System.out.println("Print Seating [A]vailability Chart,\t");
-        System.out.println("Print [M]anifest\t");
-        System.out.println("[Q]uit\n");
-        System.out.println("Please enter your choice below:\n");
-        String n = reader.next();
-        ActOnUserInput(n,flightName);
+        while(true) {
+            System.out.println("\nAdd [P]assenger,Add [G]roup,[C]ancel Reservations,\nPrint Seat [A]vailability Chart," +
+                    "Print [M]anifest,[Q]uit\n");
+
+            String n = reader.next();
+            ActOnUserInput(n, flightName);
+            if(n.equals("Q"))
+                break;
+        }
         reader.close();
-        return n;
+        return "Q";
     }
 
     public static void ActOnUserInput(String s, String flightName) {
-        Scanner key = new Scanner(System.in);
+
+
         String pname;
         String ServiceClass;
         String SeatPreferred;
+        Scanner key = new Scanner(System.in);
 
         if ((s.equals("p")) || (s.equals("P"))) {
             System.out.print("Name: ");
             pname = key.nextLine();
-            System.out.print("Service Class: ");
+            System.out.print("Service Class Preference[First/Economy]: ");
             ServiceClass = key.nextLine();
-            System.out.print("Seat Preference: ");
-            SeatPreferred = key.nextLine();
-            IndividualPassengerRequest individualPassengerRequest = new IndividualPassengerRequest();
-            individualPassengerRequest.setIndividualPassengerRequest(pname,ServiceClass,SeatPreferred);
-            individualPassengerRequest.processIndividualRequest(flightName);
+            if((ServiceClass.equals("First")) || (ServiceClass.equals("Economy"))) {
+                System.out.print("Seat Preference: ");
+                SeatPreferred = key.nextLine();
+                if ((SeatPreferred.equals("W")) || (SeatPreferred.equals("C")) || (SeatPreferred.equals("A"))) {
+                    IndividualPassengerRequest individualPassengerRequest = new IndividualPassengerRequest();
+                    individualPassengerRequest.setIndividualPassengerRequest(pname, SeatPreferred, ServiceClass);
+                    individualPassengerRequest.processIndividualRequest(flightName);
+                }
 
+            }
         }
     }
 }
