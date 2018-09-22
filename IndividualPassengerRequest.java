@@ -5,8 +5,9 @@ public class IndividualPassengerRequest {
     String SeatPreference;
     String ClassOfServicePreference;
 
-    public void setIndividualPassengerRequest(String pname, String SeatPreferred, String ClassOfService)
-    {
+    String SeatAssigned;
+
+    public void setIndividualPassengerRequest(String pname, String SeatPreferred, String ClassOfService) {
         passengerName = pname;
         SeatPreference = SeatPreferred;
         ClassOfServicePreference = ClassOfService;
@@ -24,12 +25,9 @@ public class IndividualPassengerRequest {
         return ClassOfServicePreference;
     }
 
-    public void processIndividualRequest(String fileName)
-    {
+    public void processIndividualRequest(String fileName) {
         ReservationProgram reservationProgram = new ReservationProgram();
-        reservationProgram.CheckSeatAvailabiltyandAssignSeat(fileName,passengerName);
-
-
+        reservationProgram.CheckSeatAvailabilityandAssignSeat(fileName,passengerName,ClassOfServicePreference);
     }
 }
 
