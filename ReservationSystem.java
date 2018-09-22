@@ -13,10 +13,7 @@ public class ReservationSystem {
                 f.createNewFile();
             }
 
-            while(true){
-                in = DisplayPromptToUserAndReceiveInput(flightName);
-            }
-
+            in = DisplayPromptToUserAndReceiveInput(flightName);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +43,7 @@ public class ReservationSystem {
         String SeatPreferred;
         Scanner key = new Scanner(System.in);
 
-        if ((s.equals("p")) || (s.equals("P"))) {
+        if ((s.equals("P"))) {
             System.out.print("Name: ");
             pname = key.nextLine();
             System.out.print("Service Class Preference[First/Economy]: ");
@@ -62,8 +59,9 @@ public class ReservationSystem {
 
             }
         }
+        else if((s.equals("Q"))){
+            ReservationProgram reservationProgram = new ReservationProgram();
+            reservationProgram.WritePassengerDetailsToFile(flightName);
+        }
     }
 }
-
-
-
