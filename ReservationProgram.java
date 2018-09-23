@@ -118,18 +118,19 @@ public class ReservationProgram {
 
     public void WritePassengerDetailsToFile(String fileName)
     {
+        int seatAssignedindex;
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName,true));
             try {
                 for (String object: seatMap.arrayList) {
-                    //System.out.println(object);
                     if ((object.equals("")))
                     {;
                     }
                     else {
                         out.write(object);
                         out.write(",");
-                        out.write(seatMap.arrayList.indexOf(object));
+                        seatAssignedindex = seatMap.arrayList.indexOf(object);
+                        out.write(Integer.toString((seatAssignedindex)));
                         out.newLine();
                     }
                 }
@@ -140,14 +141,6 @@ public class ReservationProgram {
             out.close();
             }
 
-            catch (IOException e) {
-                System.out.println("exception occurred" + e);
-            }
-        }
-}
-(pname);
-            out.close();
-            }
             catch (IOException e) {
                 System.out.println("exception occurred" + e);
             }
