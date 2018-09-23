@@ -37,7 +37,6 @@ public class ReservationSystem {
 
     public static void ActOnUserInput(String s, String flightName) {
 
-
         String pname;
         String ServiceClass;
         String SeatPreferred;
@@ -62,6 +61,20 @@ public class ReservationSystem {
         else if((s.equals("Q"))){
             ReservationProgram reservationProgram = new ReservationProgram();
             reservationProgram.WritePassengerDetailsToFile(flightName);
+        }
+        else if ((s.equals("C"))) {
+            System.out.print("Do you want to cancel Individual or Group Reservation? : ");
+            UserChoiceOfCancellation = key.nextLine();
+            if(UserChoiceOfCancellation.equals("Individual")){
+                System.out.print("Name: ");
+            }
+            else if(UserChoiceOfCancellation.equals("Group"))
+            {
+                System.out.print("Group Name: ");
+            }
+            pname = key.nextLine();
+            ReservationProgram reservationProgram = new ReservationProgram();
+            reservationProgram.CancelReservation(pname);
         }
     }
 }
