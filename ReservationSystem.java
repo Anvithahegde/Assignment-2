@@ -22,13 +22,13 @@ public class ReservationSystem {
 
     public static String DisplayPromptToUserAndReceiveInput(String flightName) {
         Scanner reader = new Scanner(System.in);
-        while(true) {
+        while (true) {
             System.out.println("\nAdd [P]assenger,Add [G]roup,[C]ancel Reservations,\nPrint Seat [A]vailability Chart," +
                     "Print [M]anifest,[Q]uit\n");
 
             String n = reader.next();
             ActOnUserInput(n, flightName);
-            if(n.equals("Q"))
+            if (n.equals("Q"))
                 break;
         }
         reader.close();
@@ -40,14 +40,18 @@ public class ReservationSystem {
         String pname;
         String ServiceClass;
         String SeatPreferred;
+        String UserChoiceOfCancellation;
         Scanner key = new Scanner(System.in);
 
+        ReservationProgram reservationProgram = new ReservationProgram();
+
         if ((s.equals("P"))) {
+            reservationProgram.UpdateSeatMap(flightName);
             System.out.print("Name: ");
             pname = key.nextLine();
             System.out.print("Service Class Preference[First/Economy]: ");
             ServiceClass = key.nextLine();
-            if((ServiceClass.equals("First")) || (ServiceClass.equals("Economy"))) {
+            if ((ServiceClass.equals("First")) || (ServiceClass.equals("Economy"))) {
                 System.out.print("Seat Preference: ");
                 SeatPreferred = key.nextLine();
                 if ((SeatPreferred.equals("W")) || (SeatPreferred.equals("C")) || (SeatPreferred.equals("A"))) {
@@ -55,26 +59,32 @@ public class ReservationSystem {
                     individualPassengerRequest.setIndividualPassengerRequest(pname, SeatPreferred, ServiceClass);
                     individualPassengerRequest.processIndividualRequest(flightName);
                 }
-
             }
-        }
-        else if((s.equals("Q"))){
-            ReservationProgram reservationProgram = new ReservationProgram();
+        } else if ((s.equals("Q"))) {
             reservationProgram.WritePassengerDetailsToFile(flightName);
-        }
-        else if ((s.equals("C"))) {
+        } else if ((s.equals("C"))) {
             System.out.print("Do you want to cancel Individual or Group Reservation? : ");
             UserChoiceOfCancellation = key.nextLine();
             if(UserChoiceOfCancellation.equals("Individual")){
                 System.out.print("Name: ");
             }
-            else if(UserChoiceOfCancellation.equals("Group"))
-            {
+            else if(UserChoiceOfCancellation.equals("Group")) {
                 System.out.print("Group Name: ");
             }
             pname = key.nextLine();
-            ReservationProgram reservationProgram = new ReservationProgram();
             reservationProgram.CancelReservation(pname);
+        }
+        else if((s.equals("A"))){
+            reservationProgram.UpdateSeatMap(flightName);
+            System.out.print("Service Class Preference[First/Economy]: ");
+            ServiceClass = key.nextLine();
+            reservationProgram.displaySeatAvailabiltyChart(flightName,ServiceClass);
+        }
+        else if((s.equals("M"))){
+            reservationProgram.UpdateSeatMap(flightName);
+            System.out.print("Service Class Preference[First/Economy]: ");
+            ServiceClass = key.nextLine();
+            reservationProgram.displayManifestList(flightName,ServiceClass);
         }
     }
 }
