@@ -7,7 +7,7 @@ public class ReservationProgram {
     static int seatCount = 0;
 
     String SeatAssigned;
-    public void CheckSeatAvailabilityandAssignSeat(String fileName, String pname, String Class){
+        public void CheckSeatAvailabilityandAssignSeat(String fileName, String pname, String Class, String SeatPreference){
 
         boolean seatAssigned = false;
         int index;
@@ -36,24 +36,55 @@ public class ReservationProgram {
             case "Economy":
                 index = 7;
                 row = 10;
-                while(seatAssigned != true) {
-                    if (seatMap.arrayList.get(index).equals("")) {
-                        seatMap.arrayList.add(index, pname);
-                        SeatAssigned = Integer.toString((row)) + "A";
-                        seatAssigned = true;
-                    } else if (seatMap.arrayList.get(index + 5).equals("")) {
-                        seatMap.arrayList.add(index + 5, pname);
-                        SeatAssigned = Integer.toString((row)) + "F";
-                        seatAssigned = true;
+
+                if(SeatPreference.equals("W")) {
+                    while (seatAssigned != true) {
+                        if (seatMap.arrayList.get(index).equals("")) {
+                            seatMap.arrayList.add(index, pname);
+                            SeatAssigned = Integer.toString((row)) + "A";
+                            seatAssigned = true;
+                        } else if (seatMap.arrayList.get(index + 5).equals("")) {
+                            seatMap.arrayList.add(index + 5, pname);
+                            SeatAssigned = Integer.toString((row)) + "F";
+                            seatAssigned = true;
+                        }
+                        index = index + 6;
+                        row = row + 1;
                     }
-                    index = index + 6;
-                    row = row + 1;
+                }
+                else if(SeatPreference.equals("C")) {
+                    while (seatAssigned != true) {
+                        if (seatMap.arrayList.get(index + 1).equals("")) {
+                            seatMap.arrayList.add(index + 1, pname);
+                            SeatAssigned = Integer.toString((row)) + "B";
+                            seatAssigned = true;
+                        } else if (seatMap.arrayList.get(index + 4).equals("")) {
+                            seatMap.arrayList.add(index + 4, pname);
+                            SeatAssigned = Integer.toString((row)) + "E";
+                            seatAssigned = true;
+                        }
+                        index = index + 6;
+                        row = row + 1;
+                    }
+                }
+                else if(SeatPreference.equals("A")) {
+                    while (seatAssigned != true) {
+                        if (seatMap.arrayList.get(index+2).equals("")) {
+                            seatMap.arrayList.add(index+2, pname);
+                            SeatAssigned = Integer.toString((row)) + "C";
+                            seatAssigned = true;
+                        } else if (seatMap.arrayList.get(index + 3).equals("")) {
+                            seatMap.arrayList.add(index + 3, pname);
+                            SeatAssigned = Integer.toString((row)) + "D";
+                            seatAssigned = true;
+                        }
+                        index = index + 6;
+                        row = row + 1;
+                    }
                 }
                 System.out.println("\nThe Passenger is assigned the seat: " + SeatAssigned);
                 break;
         }
-        
-        
     }
 
     public void WritePassengerDetailsToFile(String fileName,String pname)
