@@ -12,6 +12,3 @@
 
 ## Additional Information
 
-How to compile and execute your program?
-
-What else do you want to let your professor / TA know about this submission?
