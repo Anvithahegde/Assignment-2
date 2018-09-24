@@ -87,7 +87,7 @@ public class ReservationProgram {
                 break;
 
             case "Economy":
-                index = 7;
+                index = 8;
                 row = 10;
 
                 if (SeatPreference.equals("W")) {
@@ -175,6 +175,7 @@ public class ReservationProgram {
     }
 
     public void CancelReservation(String pname) {
+
         int arrayListIndex;
 
         arrayListIndex = seatMap.arrayList.indexOf(pname);
