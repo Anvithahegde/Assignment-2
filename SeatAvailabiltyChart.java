@@ -21,7 +21,7 @@ public class SeatAvailabiltyChart {
                     index = Integer.parseInt(csv[filecounter]);
                     availabilitychart.set(index,csv[filecounter+1]);
                 }
-                System.out.println("Availability Chart");
+                System.out.println("\n Availability Chart");
                 for (int i = 1; i <= 2; i++) {
                     ch = 'A';
                     System.out.println("\n");
