@@ -25,7 +25,6 @@ public class ReservationSystem {
         while (true) {
             System.out.println("\nAdd [P]assenger,Add [G]roup,[C]ancel Reservations,\nPrint Seat [A]vailability Chart," +
                     "Print [M]anifest,[Q]uit\n");
-
             String n = reader.next();
             ActOnUserInput(n, flightName);
             if (n.equals("Q"))
